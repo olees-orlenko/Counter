@@ -9,16 +9,15 @@ import UIKit
 import Foundation
 
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
 
-    @IBOutlet weak var counterLabel: UILabel!
-    @IBOutlet weak var counterButton: UIButton!
-    @IBOutlet weak var minusButton: UIButton!
-    @IBOutlet weak var zeroButton: UIButton!
-    @IBOutlet weak var historeText: UITextView!
+    @IBOutlet weak private var counterLabel: UILabel!
+    @IBOutlet weak private var counterButton: UIButton!
+    @IBOutlet weak private var minusButton: UIButton!
+    @IBOutlet weak private var zeroButton: UIButton!
+    @IBOutlet weak private var historeText: UITextView!
     private var counter: Int = 0
     private var history: [String] = []
-    private var date = Date()
     private var dateFormatter = DateFormatter()
 
     override func viewDidLoad() {
@@ -26,14 +25,14 @@ class ViewController: UIViewController {
         updateCounterLabel()
     }
     
-    @IBAction func buttonDidTap(_ sender: Any) {
+    @IBAction private func buttonDidTap(_ sender: Any) {
         counter += 1
         updateCounterLabel()
         history.append("\(updateDate()): значение изменено на +1")
         updateHistoryText()
     }
     
-    @IBAction func minusButtonDidTap(_ sender: Any) {
+    @IBAction private func minusButtonDidTap(_ sender: Any) {
         if counter > 0{
             counter -= 1
             updateCounterLabel()
@@ -42,7 +41,7 @@ class ViewController: UIViewController {
         }
     }
 
-    @IBAction func zeroButtonDidTap(_ sender: Any) {
+    @IBAction private func zeroButtonDidTap(_ sender: Any) {
         if counter > 0{
             counter = 0
             updateCounterLabel()
@@ -66,7 +65,7 @@ class ViewController: UIViewController {
     
     private func updateDate() -> String{
         dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
-        let formattedDate = dateFormatter.string(from: date)
+        let formattedDate = dateFormatter.string(from: Date())
         return formattedDate
     }
 }
